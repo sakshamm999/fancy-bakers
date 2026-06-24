@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fancy Bakers — Jalandhar Since 1960s</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --cream:#FDF8F0;
+    --deep:#1A0A00;
+    --gold:#B8860B;
+    --gold-light:#F5E6B0;
+    --warm:#7A3B10;
+    --text:#2C1A0A;
+    --muted:#8C7A6A;
+    --border:#E8D8C0;
+  }
+  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+  
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep);letter-spacing:0.02em}
+  .nav-logo span{color:var(--gold);font-style:italic}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{text-decoration:none;font-size:0.85rem;color:var(--muted);letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+  .nav-links a:hover{color:var(--warm)}
+  .nav-cta{background:var(--deep);color:var(--gold-light);padding:0.5rem 1.2rem;border-radius:2px;font-size:0.8rem;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:background 0.2s}
+  .nav-cta:hover{background:var(--warm)}
+
+  /* HERO */
+  .hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:4rem 3rem 4rem 4rem;gap:4rem;border-bottom:1px solid var(--border)}
+  .hero-badge{display:inline-block;background:var(--gold-light);color:var(--warm);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:2px;margin-bottom:1.5rem}
+  .hero h1{font-family:'Playfair Display',serif;font-size:3.8rem;line-height:1.1;color:var(--deep);margin-bottom:1.5rem}
+  .hero h1 em{color:var(--warm);font-style:italic}
+  .hero p{font-size:1.05rem;line-height:1.8;color:var(--muted);max-width:420px;margin-bottom:2.5rem}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--deep);color:var(--gold-light);padding:0.85rem 2rem;border-radius:2px;text-decoration:none;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;transition:background 0.2s;border:none;cursor:pointer}
+  .btn-primary:hover{background:var(--warm)}
+  .btn-secondary{background:transparent;color:var(--deep);padding:0.85rem 2rem;border-radius:2px;text-decoration:none;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--deep);transition:all 0.2s;cursor:pointer}
+  .btn-secondary:hover{background:var(--deep);color:var(--gold-light)}
+  
+  .hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+  .hero-img-frame{width:100%;aspect-ratio:4/5;background:linear-gradient(145deg,#3d1f08,#1A0A00);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .hero-img-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(184,134,11,0.15),transparent 60%)}
+  .bakery-art{text-align:center;z-index:1}
+  .bakery-art .big-num{font-family:'Playfair Display',serif;font-size:7rem;color:rgba(245,230,176,0.08);line-height:1;position:absolute;top:1rem;right:1.5rem}
+  .bakery-art .label{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold-light);opacity:0.9;margin-bottom:0.5rem}
+  .bakery-art .sub{font-size:0.75rem;color:rgba(245,230,176,0.5);letter-spacing:0.15em;text-transform:uppercase}
+  .heritage-pill{position:absolute;bottom:2rem;left:2rem;background:rgba(245,230,176,0.08);border:1px solid rgba(245,230,176,0.2);border-radius:2px;padding:1rem 1.25rem}
+  .heritage-pill .num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light)}
+  .heritage-pill .desc{font-size:0.7rem;color:rgba(245,230,176,0.6);letter-spacing:0.1em;text-transform:uppercase}
+
+  /* STRIP */
+  .strip{background:var(--deep);padding:1rem 3rem;display:flex;gap:3rem;overflow-x:auto;border-top:1px solid #2C1A0A}
+  .strip-item{display:flex;align-items:center;gap:0.75rem;white-space:nowrap;flex-shrink:0}
+  .strip-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+  .strip-item span{font-size:0.78rem;color:rgba(245,230,176,0.7);letter-spacing:0.08em;text-transform:uppercase}
+
+  /* SECTION COMMON */
+  section{padding:5rem 4rem;border-bottom:1px solid var(--border)}
+  .section-eyebrow{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--deep);line-height:1.2;margin-bottom:1.25rem}
+  .section-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:520px}
+
+  /* ABOUT / HERITAGE */
+  .heritage{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .heritage-timeline{display:flex;flex-direction:column;gap:2rem}
+  .timeline-item{display:flex;gap:1.5rem;align-items:flex-start}
+  .timeline-year{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);min-width:70px;line-height:1}
+  .timeline-content h4{font-size:0.9rem;font-weight:500;color:var(--deep);margin-bottom:0.25rem}
+  .timeline-content p{font-size:0.85rem;color:var(--muted);line-height:1.6}
+  .timeline-divider{width:1px;background:var(--border);margin-left:35px;height:20px}
+
+  /* PRODUCTS */
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+  .product-card{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;cursor:pointer}
+  .product-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(26,10,0,0.1)}
+  .product-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative}
+  .product-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,0.3),transparent)}
+  .product-badge{position:absolute;top:10px;right:10px;background:var(--gold-light);color:var(--warm);font-size:0.65rem;padding:0.25rem 0.6rem;border-radius:2px;letter-spacing:0.06em;text-transform:uppercase;font-weight:500}
+  .product-info{padding:1rem 1.25rem 1.25rem}
+  .product-info h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--deep);margin-bottom:0.3rem}
+  .product-info p{font-size:0.8rem;color:var(--muted);line-height:1.5;margin-bottom:0.75rem}
+  .product-price{font-size:0.95rem;font-weight:500;color:var(--warm)}
+
+  /* GIFTING / NRI */
+  .gifting{background:#FFF9F0;margin:-1px}
+  .gifting-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+  .gift-form{background:#fff;border:1px solid var(--border);border-radius:4px;padding:2rem}
+  .gift-form h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--deep);margin-bottom:0.5rem}
+  .gift-form p{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+  .form-field{margin-bottom:1rem}
+  .form-field label{display:block;font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+  .form-field input,.form-field select,.form-field textarea{width:100%;padding:0.7rem 0.9rem;border:1px solid var(--border);border-radius:2px;font-family:'Inter',sans-serif;font-size:0.9rem;color:var(--text);background:#FDF8F0;outline:none;transition:border-color 0.2s}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .wa-note{display:flex;align-items:center;gap:0.6rem;font-size:0.8rem;color:var(--muted);margin-top:1rem}
+  .wa-dot{width:8px;height:8px;border-radius:50%;background:#25D366;flex-shrink:0}
+
+  /* TESTIMONIALS */
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+  .testi-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:1.5rem}
+  .testi-stars{color:var(--gold);font-size:0.9rem;margin-bottom:0.75rem;letter-spacing:2px}
+  .testi-text{font-size:0.9rem;color:var(--text);line-height:1.7;font-style:italic;margin-bottom:1rem}
+  .testi-author{font-size:0.8rem;font-weight:500;color:var(--deep)}
+  .testi-loc{font-size:0.75rem;color:var(--muted)}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+  .contact-detail{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+  .contact-item h4{font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+  .contact-item p{font-size:0.95rem;color:var(--deep)}
+  .whatsapp-btn{display:inline-flex;align-items:center;gap:0.75rem;background:#25D366;color:#fff;padding:1rem 1.75rem;border-radius:2px;text-decoration:none;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;transition:background 0.2s;margin-top:1rem}
+  .whatsapp-btn:hover{background:#1da851}
+  .wa-icon{width:18px;height:18px;fill:white}
+  .map-placeholder{background:var(--deep);border-radius:4px;height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem}
+  .map-placeholder p{color:rgba(245,230,176,0.5);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase}
+  .map-dot{width:12px;height:12px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+
+  /* FOOTER */
+  footer{background:var(--deep);padding:3rem 4rem;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;border-top:1px solid #2C1A0A}
+  .footer-brand .logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold-light);margin-bottom:0.75rem}
+  .footer-brand p{font-size:0.82rem;color:rgba(245,230,176,0.5);line-height:1.7;max-width:260px}
+  .footer-col h4{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
+  .footer-col ul li a{text-decoration:none;font-size:0.82rem;color:rgba(245,230,176,0.5);transition:color 0.2s}
+  .footer-col ul li a:hover{color:var(--gold-light)}
+  .footer-bottom{background:var(--deep);padding:1.25rem 4rem;border-top:1px solid #2C1A0A;display:flex;justify-content:space-between;align-items:center}
+  .footer-bottom p{font-size:0.75rem;color:rgba(245,230,176,0.3)}
+
+  /* TABS for products */
+  .tab-bar{display:flex;gap:0;margin-bottom:0;border-bottom:1px solid var(--border)}
+  .tab{padding:0.65rem 1.5rem;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;border:none;background:none;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.2s}
+  .tab.active{color:var(--warm);border-bottom-color:var(--warm);font-weight:500}
+
+  /* ORDER MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,10,0,0.7);z-index:200;align-items:center;justify-content:center}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--cream);border-radius:4px;padding:2.5rem;width:90%;max-width:480px;position:relative}
+  .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted)}
+  .modal h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--deep);margin-bottom:0.5rem}
+  .modal p{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem}
+  .order-success{display:none;text-align:center;padding:2rem 0}
+  .order-success .checkmark{font-size:3rem;margin-bottom:1rem}
+  .order-success h4{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--deep);margin-bottom:0.5rem}
+  .order-success p{font-size:0.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Fancy <span>Bakers</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#gifting">Gift Boxes</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#gifting" class="nav-cta">Send a Gift</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-bottom:1px solid var(--border)">
+  <div class="hero-content">
+    <div class="hero-badge">Est. 1960s · Jalandhar, Punjab</div>
+    <h1>Baked with<br><em>sixty years</em><br>of love.</h1>
+    <p>Three generations of craft. Every mithai, every biscuit, every celebration cake — made the old way, with desi ghee, real ingredients, and time.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#gifting" class="btn-secondary">Send a Gift Box</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-frame">
+      <span class="big-num">60</span>
+      <div class="bakery-art">
+        <div style="font-size:5rem;margin-bottom:1rem">🎂</div>
+        <div class="label">Fancy Bakers</div>
+        <div class="sub">Jalandhar · Since the 1960s</div>
+      </div>
+      <div class="heritage-pill">
+        <div class="num">60+</div>
+        <div class="desc">Years of Heritage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><div class="strip-dot"></div><span>100% Eggless</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span>Pure Desi Ghee</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span>Pan-India Shipping</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span>NRI Gift Delivery</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span>Wedding & Corporate Orders</span></div>
+  <div class="strip-item"><div class="strip-dot"></div><span>Festive Gift Boxes</span></div>
+</div>
+
+<!-- HERITAGE / ABOUT -->
+<section id="about">
+  <div class="heritage">
+    <div>
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">A name Jalandhar has trusted since the 1960s.</h2>
+      <p class="section-sub">What started as a small neighbourhood bakery is now a legacy passed through three generations — the same recipes, the same desi ghee, the same love. Fancy Bakers isn't just a bakery. It's a memory in every home it's touched.</p>
+    </div>
+    <div class="heritage-timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">1960s</div>
+        <div class="timeline-content">
+          <h4>The beginning</h4>
+          <p>Founded in Jalandhar with a simple belief: real ingredients, real craft, no shortcuts.</p>
+        </div>
+      </div>
+      <div class="timeline-divider"></div>
+      <div class="timeline-item">
+        <div class="timeline-year">1980s</div>
+        <div class="timeline-content">
+          <h4>A neighbourhood institution</h4>
+          <p>Generations of Jalandhar families made Fancy Bakers their go-to for every celebration.</p>
+        </div>
+      </div>
+      <div class="timeline-divider"></div>
+      <div class="timeline-item">
+        <div class="timeline-year">2000s</div>
+        <div class="timeline-content">
+          <h4>Expanding traditions</h4>
+          <p>New products, same values. Eggless baking became our signature across the full range.</p>
+        </div>
+      </div>
+      <div class="timeline-divider"></div>
+      <div class="timeline-item">
+        <div class="timeline-year">Now</div>
+        <div class="timeline-content">
+          <h4>Shipping Jalandhar's taste, everywhere</h4>
+          <p>From Canada to the UAE — NRI families now send Fancy Bakers to their loved ones back home.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" style="background:#fff">
+  <div class="section-eyebrow">Our Products</div>
+  <h2 class="section-title">Made fresh. Delivered with care.</h2>
+  
+  <div class="tab-bar" style="margin-top:2rem">
+    <button class="tab active" onclick="filterProducts('all',this)">All</button>
+    <button class="tab" onclick="filterProducts('biscuits',this)">Biscuits & Cookies</button>
+    <button class="tab" onclick="filterProducts('cakes',this)">Cakes</button>
+    <button class="tab" onclick="filterProducts('gift',this)">Gift Boxes</button>
+  </div>
+
+  <div class="products-grid" id="products-grid">
+    <div class="product-card" data-cat="biscuits" onclick="openOrder('Desi Ghee Atta Biscuits','₹350/pack')">
+      <div class="product-img" style="background:#FDF3E3"><span>🍪</span><span class="product-badge">Bestseller</span></div>
+      <div class="product-info">
+        <h3>Desi Ghee Atta Biscuits</h3>
+        <p>The original. Whole wheat, pure desi ghee, lightly sweet — the biscuit Jalandhar grew up on.</p>
+        <div class="product-price">₹350 / pack</div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="biscuits" onclick="openOrder('Kesar Pistachio Ghee Cookie','₹480/dozen')">
+      <div class="product-img" style="background:#FEF9E7"><span>🌰</span><span class="product-badge">New</span></div>
+      <div class="product-info">
+        <h3>Kesar Pistachio Ghee Cookie</h3>
+        <p>Saffron from Kashmir, pistachios, desi ghee. An elevation of the classic ghee cookie.</p>
+        <div class="product-price">₹480 / dozen</div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="cakes" onclick="openOrder('Basque Burnt Cheesecake','₹1,200')">
+      <div class="product-img" style="background:#FDF0E8"><span>🎂</span><span class="product-badge">Eggless</span></div>
+      <div class="product-info">
+        <h3>Basque Burnt Cheesecake</h3>
+        <p>Rich, caramelised, perfectly jiggly. Made eggless with silken tofu and agar agar.</p>
+        <div class="product-price">₹1,200</div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="cakes" onclick="openOrder('Pistachio Knafeh Tart','₹950')">
+      <div class="product-img" style="background:#F0FAF0"><span>🥧</span><span class="product-badge">New</span></div>
+      <div class="product-info">
+        <h3>Pistachio Knafeh Tart</h3>
+        <p>A Punjabi-Arab fusion. Crisp kataifi pastry, pistachio cream, rosewater honey.</p>
+        <div class="product-price">₹950</div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="gift" onclick="openOrder('Heritage Gift Box','₹2,500')">
+      <div class="product-img" style="background:#FFF8E1"><span>🎁</span><span class="product-badge">Ships Pan-India</span></div>
+      <div class="product-info">
+        <h3>Heritage Gift Box</h3>
+        <p>Curated selection of our signature biscuits, cookies & sweets. Perfect for Diwali, Rakhi, and weddings.</p>
+        <div class="product-price">₹2,500 onwards</div>
+      </div>
+    </div>
+    <div class="product-card" data-cat="gift" onclick="openOrder('NRI Premium Gift Box','₹4,500')">
+      <div class="product-img" style="background:#FFF0F5"><span>✈️</span><span class="product-badge">NRI Favourite</span></div>
+      <div class="product-info">
+        <h3>NRI Premium Gift Box</h3>
+        <p>Send the taste of home. Premium eggless mithai & baked goods, shipped to family anywhere in India.</p>
+        <div class="product-price">₹4,500 onwards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFTING / NRI -->
+<section id="gifting" class="gifting">
+  <div class="gifting-inner">
+    <div>
+      <div class="section-eyebrow">NRI Gift Delivery</div>
+      <h2 class="section-title">Send the taste of Jalandhar to someone you love.</h2>
+      <p class="section-sub">Living abroad? Your parents, siblings, and family back in Punjab deserve a proper gift — not a random sweet box from a stranger. Order from Fancy Bakers and we'll deliver it to their door.</p>
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:flex-start;gap:1rem">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;color:var(--warm);font-weight:500">1</div>
+          <div><p style="font-size:0.9rem;color:var(--deep);font-weight:500">Fill the form</p><p style="font-size:0.82rem;color:var(--muted)">Tell us what to send and where to deliver</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:1rem">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;color:var(--warm);font-weight:500">2</div>
+          <div><p style="font-size:0.9rem;color:var(--deep);font-weight:500">We confirm via WhatsApp</p><p style="font-size:0.82rem;color:var(--muted)">Quick confirmation, payment link, and packing photo</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:1rem">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;color:var(--warm);font-weight:500">3</div>
+          <div><p style="font-size:0.9rem;color:var(--deep);font-weight:500">They receive it fresh</p><p style="font-size:0.82rem;color:var(--muted)">Beautifully packed, delivered to their door in Jalandhar</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="gift-form">
+      <h3>Send a Gift Box</h3>
+      <p>We'll contact you on WhatsApp to confirm your order within 2 hours.</p>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Harpreet Singh" id="gf-name">
+        </div>
+        <div class="form-field">
+          <label>Your WhatsApp</label>
+          <input type="tel" placeholder="+1 647 000 0000" id="gf-phone">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Recipient's Address in Jalandhar</label>
+        <input type="text" placeholder="House no., street, Jalandhar" id="gf-address">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Gift Box</label>
+          <select id="gf-box">
+            <option>Heritage Box — ₹2,500</option>
+            <option>Premium Box — ₹4,500</option>
+            <option>Custom — I'll discuss</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Occasion</label>
+          <select id="gf-occasion">
+            <option>Diwali</option>
+            <option>Rakhi</option>
+            <option>Birthday</option>
+            <option>Wedding</option>
+            <option>Just Because</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Message for recipient (optional)</label>
+        <textarea rows="2" placeholder="With love from Canada..." id="gf-msg" style="resize:none"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem" onclick="submitGiftForm()">Send Gift Inquiry →</button>
+      <div class="wa-note"><div class="wa-dot"></div><span>We respond on WhatsApp within 2 hours</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:#fff">
+  <div class="section-eyebrow">What People Say</div>
+  <h2 class="section-title">60 years of happy families.</h2>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"My family has been buying from Fancy Bakers since before I was born. The atta biscuits taste exactly the same as they did 30 years ago — that's rare."</p>
+      <div class="testi-author">Gurpreet Kaur</div>
+      <div class="testi-loc">Jalandhar</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I'm based in Toronto. I ordered a gift box for my parents for Diwali and they called me crying with joy. Nothing says home like Fancy Bakers."</p>
+      <div class="testi-author">Manpreet Singh</div>
+      <div class="testi-loc">Toronto, Canada</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Got the Basque cheesecake for my daughter's birthday — completely eggless and absolutely stunning. My guests couldn't believe it was made locally."</p>
+      <div class="testi-author">Simran Bhatia</div>
+      <div class="testi-loc">Jalandhar</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="section-eyebrow">Find Us</div>
+      <h2 class="section-title">Visit us in Jalandhar.</h2>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <h4>Address</h4>
+          <p>Fancy Bakers, Jalandhar, Punjab, India</p>
+        </div>
+        <div class="contact-item">
+          <h4>Hours</h4>
+          <p>Mon–Sat: 9am – 8pm<br>Sunday: 10am – 6pm</p>
+        </div>
+        <div class="contact-item">
+          <h4>Phone & WhatsApp</h4>
+          <p>+91 XXXXX XXXXX</p>
+        </div>
+      </div>
+      <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-btn">
+        <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.533 5.855L.057 23.572a.75.75 0 0 0 .921.921l5.717-1.476A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.718 9.718 0 0 1-4.95-1.357l-.354-.212-3.693.953.978-3.578-.231-.367A9.718 9.718 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+    <div>
+      <div class="map-placeholder">
+        <div class="map-dot"></div>
+        <p>Jalandhar, Punjab</p>
+        <p style="font-size:0.7rem;color:rgba(245,230,176,0.3);margin-top:0.25rem">Add your Google Maps embed here</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">Fancy Bakers</div>
+    <p>Three generations of craft baking in Jalandhar, Punjab. Eggless, honest, and made with desi ghee since the 1960s.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Shop</h4>
+    <ul>
+      <li><a href="#products">Biscuits & Cookies</a></li>
+      <li><a href="#products">Cakes</a></li>
+      <li><a href="#gifting">Gift Boxes</a></li>
+      <li><a href="#gifting">NRI Gifting</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="#contact">Find Us</a></li>
+      <li><a href="#contact">WhatsApp Us</a></li>
+      <li><a href="#about">Our Story</a></li>
+    </ul>
+  </div>
+</footer>
+<div style="background:var(--deep);padding:1rem 4rem;border-top:1px solid #2C1A0A;display:flex;justify-content:space-between">
+  <p style="font-size:0.72rem;color:rgba(245,230,176,0.25)">© 2025 Fancy Bakers, Jalandhar. All rights reserved.</p>
+  <p style="font-size:0.72rem;color:rgba(245,230,176,0.25)">100% Eggless · Pure Desi Ghee</p>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="order-form-content">
+      <h3 id="modal-product-name">Product Name</h3>
+      <p>Place your order and we'll confirm via WhatsApp within 2 hours.</p>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Your name" id="m-name">
+        </div>
+        <div class="form-field">
+          <label>WhatsApp Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX" id="m-phone">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Quantity / Notes</label>
+        <input type="text" placeholder="e.g. 2 packs, gift wrap please" id="m-notes">
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem" onclick="submitOrder()">Place Order →</button>
+      <div class="wa-note"><div class="wa-dot"></div><span>We'll confirm on WhatsApp</span></div>
+    </div>
+    <div class="order-success" id="order-success">
+      <div class="checkmark">✅</div>
+      <h4>Order received!</h4>
+      <p>We'll WhatsApp you within 2 hours to confirm and share payment details.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function openOrder(name, price) {
+  document.getElementById('modal-product-name').textContent = name + ' — ' + price;
+  document.getElementById('order-form-content').style.display = '';
+  document.getElementById('order-success').style.display = 'none';
+  document.getElementById('orderModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('orderModal').classList.remove('open');
+}
+
+function submitOrder() {
+  var name = document.getElementById('m-name').value.trim();
+  var phone = document.getElementById('m-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and WhatsApp number.'); return; }
+  document.getElementById('order-form-content').style.display = 'none';
+  document.getElementById('order-success').style.display = 'block';
+}
+
+function submitGiftForm() {
+  var name = document.getElementById('gf-name').value.trim();
+  var phone = document.getElementById('gf-phone').value.trim();
+  var address = document.getElementById('gf-address').value.trim();
+  if (!name || !phone || !address) { alert('Please fill in your name, WhatsApp number, and delivery address.'); return; }
+  alert('Thank you, ' + name + '! We\'ll WhatsApp you at ' + phone + ' within 2 hours to confirm your gift order. 🎁');
+}
+
+document.getElementById('orderModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
